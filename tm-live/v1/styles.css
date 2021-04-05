@@ -17,6 +17,9 @@ body {
     margin: auto;
     text-align: center;
     font-size: 24pt;
+    align-items: center;
+    display: grid;
+    justify-items: center;   
 }
 
 /*# sourceMappingURL=styles.css.map*/

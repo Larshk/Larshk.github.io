@@ -178,9 +178,12 @@ class SpeedometerComponent {
             }
         ];
     }
+    formatValue(value) {
+        return "" + Math.floor(value);
+    }
 }
 SpeedometerComponent.ɵfac = function SpeedometerComponent_Factory(t) { return new (t || SpeedometerComponent)(); };
-SpeedometerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SpeedometerComponent, selectors: [["app-speedometer"]], inputs: { numberValue: "numberValue" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 4, vars: 8, consts: [[3, "view", "scheme", "results", "legend", "legendPosition", "animations", "max", "units"]], template: function SpeedometerComponent_Template(rf, ctx) { if (rf & 1) {
+SpeedometerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: SpeedometerComponent, selectors: [["app-speedometer"]], inputs: { numberValue: "numberValue" }, features: [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵNgOnChangesFeature"]], decls: 4, vars: 9, consts: [[3, "view", "scheme", "results", "legend", "legendPosition", "animations", "max", "units", "valueFormatting"]], template: function SpeedometerComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "ngx-charts-gauge", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "p");
@@ -189,7 +192,7 @@ SpeedometerComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdef
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx.view)("scheme", ctx.colorScheme)("results", ctx.chartData)("legend", ctx.legend)("legendPosition", ctx.legendPosition)("animations", false)("max", 1000)("units", ctx.unit);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx.view)("scheme", ctx.colorScheme)("results", ctx.chartData)("legend", ctx.legend)("legendPosition", ctx.legendPosition)("animations", false)("max", 1000)("units", ctx.unit)("valueFormatting", ctx.formatValue);
     } }, directives: [_swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_1__["GaugeComponent"]], styles: ["p[_ngcontent-%COMP%] {\r\n    margin: auto;\r\n    text-align: center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNwZWVkb21ldGVyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxZQUFZO0lBQ1osa0JBQWtCO0FBQ3RCIiwiZmlsZSI6InNwZWVkb21ldGVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJwIHtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufSJdfQ== */"] });
 
 
