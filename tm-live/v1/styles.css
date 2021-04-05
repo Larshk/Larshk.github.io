@@ -4,7 +4,19 @@
 
 html, body { height: 100%; }
 
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    /* color: rgb(65, 19, 151); */
+    background-color: #ffffff;
+}
 
+.live-data-block {
+    width: 400px;
+    height: 250px;
+    margin: auto;
+    text-align: center;
+    font-size: 24pt;
+}
 
 /*# sourceMappingURL=styles.css.map*/

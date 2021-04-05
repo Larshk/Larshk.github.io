@@ -12,6 +12,42 @@ module.exports = __webpack_require__(/*! C:\Dev\trackmania\tm-live\src\main.ts *
 
 /***/ }),
 
+/***/ "8xUC":
+/*!*******************************************************!*\
+  !*** ./src/app/blocks/racetime/racetime.component.ts ***!
+  \*******************************************************/
+/*! exports provided: RacetimeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RacetimeComponent", function() { return RacetimeComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _pipes_race_timer_pipe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../pipes/race-timer-pipe */ "ZNFS");
+
+
+class RacetimeComponent {
+    constructor() { }
+    ngOnInit() {
+    }
+}
+RacetimeComponent.ɵfac = function RacetimeComponent_Factory(t) { return new (t || RacetimeComponent)(); };
+RacetimeComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: RacetimeComponent, selectors: [["app-racetime"]], inputs: { milliseconds: "milliseconds" }, decls: 5, vars: 3, consts: [[1, "live-data-block"]], template: function RacetimeComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipe"](2, "raceTimer");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "p");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](4, "Race timer");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+    } if (rf & 2) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpipeBind1"](2, 1, ctx.milliseconds));
+    } }, pipes: [_pipes_race_timer_pipe__WEBPACK_IMPORTED_MODULE_1__["RaceTimerPipe"]], styles: ["p[_ngcontent-%COMP%] {\r\n    margin: auto;\r\n    text-align: center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJhY2V0aW1lLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxZQUFZO0lBQ1osa0JBQWtCO0FBQ3RCIiwiZmlsZSI6InJhY2V0aW1lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJwIHtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufSJdfQ== */"] });
+
+
+/***/ }),
+
 /***/ "AytR":
 /*!*****************************************!*\
   !*** ./src/environments/environment.ts ***!
@@ -68,17 +104,9 @@ class LocalOpenplanetService {
     constructor() {
         this.messagesSubject$ = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
     }
-    //public messages$ = this.messagesSubject$.pipe(switchAll(), catchError(e => { throw e }));
     connect(cfg = { reconnect: false }) {
         if (!this.socket$ || this.socket$.closed) {
             this.socket$ = this.getNewWebSocket();
-            /*
-            const messages = this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
-              tap({
-                error: error => console.log(error),
-              }), catchError(_ => EMPTY))
-            this.messagesSubject$.next(messages);
-            */
             this.socket$.subscribe(msg => this.messagesSubject$.next(msg), // Called whenever there is a message from the server.
             // Called whenever there is a message from the server.
             err => console.log(err), // Called if at any point WebSocket API signals some kind of error.
@@ -212,6 +240,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_local_openplanet_local_openplanet_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/local-openplanet/local-openplanet.service */ "DMQw");
 /* harmony import */ var _blocks_speedometer_speedometer_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../blocks/speedometer/speedometer.component */ "QxtA");
 /* harmony import */ var _blocks_gearmeter_gearmeter_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../blocks/gearmeter/gearmeter.component */ "XTvd");
+/* harmony import */ var _blocks_racetime_racetime_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../blocks/racetime/racetime.component */ "8xUC");
+
 
 
 
@@ -221,12 +251,14 @@ class LiveRaceComponent {
         this.localOpenplanetService = localOpenplanetService;
         this.speed = 0;
         this.gear = 0;
+        this.racetime = 0;
         this.localOpenplanetService.connect();
     }
     ngOnInit() {
         this.liveData$ = this.localOpenplanetService.messagesSubject$.subscribe(msg => {
             this.speed = msg.speed;
             this.gear = msg.gear;
+            this.racetime = msg.racetime;
         });
     }
     ngOnDestroy() {
@@ -234,24 +266,20 @@ class LiveRaceComponent {
     }
 }
 LiveRaceComponent.ɵfac = function LiveRaceComponent_Factory(t) { return new (t || LiveRaceComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_services_local_openplanet_local_openplanet_service__WEBPACK_IMPORTED_MODULE_1__["LocalOpenplanetService"])); };
-LiveRaceComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LiveRaceComponent, selectors: [["app-live-race"]], decls: 7, vars: 2, consts: [[1, "flexed"], ["id", "speed"], [3, "numberValue"], ["id", "gear"]], template: function LiveRaceComponent_Template(rf, ctx) { if (rf & 1) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "h1");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, "Trackmania live race");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 0);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](3, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](4, "app-speedometer", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](6, "app-gearmeter", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+LiveRaceComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: LiveRaceComponent, selectors: [["app-live-race"]], decls: 4, vars: 3, consts: [[1, "flexed"], [3, "numberValue"], [3, "milliseconds"]], template: function LiveRaceComponent_Template(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](1, "app-speedometer", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](2, "app-gearmeter", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](3, "app-racetime", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("numberValue", ctx.speed);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("numberValue", ctx.gear);
-    } }, directives: [_blocks_speedometer_speedometer_component__WEBPACK_IMPORTED_MODULE_2__["SpeedometerComponent"], _blocks_gearmeter_gearmeter_component__WEBPACK_IMPORTED_MODULE_3__["GearmeterComponent"]], styles: [".flexed[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: flex-start;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtcmFjZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixlQUFlO0lBQ2YsMkJBQTJCO0FBQy9CIiwiZmlsZSI6ImxpdmUtcmFjZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZsZXhlZCB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICAgIGZsZXgtd3JhcDogd3JhcDtcclxuICAgIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcclxufSJdfQ== */"] });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("milliseconds", ctx.racetime);
+    } }, directives: [_blocks_speedometer_speedometer_component__WEBPACK_IMPORTED_MODULE_2__["SpeedometerComponent"], _blocks_gearmeter_gearmeter_component__WEBPACK_IMPORTED_MODULE_3__["GearmeterComponent"], _blocks_racetime_racetime_component__WEBPACK_IMPORTED_MODULE_4__["RacetimeComponent"]], styles: [".flexed[_ngcontent-%COMP%] {\r\n    display: flex;\r\n    flex-direction: row;\r\n    flex-wrap: wrap;\r\n    justify-content: flex-start;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImxpdmUtcmFjZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixlQUFlO0lBQ2YsMkJBQTJCO0FBQy9CIiwiZmlsZSI6ImxpdmUtcmFjZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmZsZXhlZCB7XHJcbiAgICBkaXNwbGF5OiBmbGV4O1xyXG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcclxuICAgIGZsZXgtd3JhcDogd3JhcDtcclxuICAgIGp1c3RpZnktY29udGVudDogZmxleC1zdGFydDtcclxufSJdfQ== */"] });
 
 
 /***/ }),
@@ -304,7 +332,7 @@ GearmeterComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefin
     } if (rf & 2) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("view", ctx.view)("scheme", ctx.colorScheme)("value", ctx.numberValue)("units", ctx.unit)("animations", false)("min", 1)("max", 5);
-    } }, directives: [_swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_1__["LinearGaugeComponent"]], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJnZWFybWV0ZXIuY29tcG9uZW50LmNzcyJ9 */"] });
+    } }, directives: [_swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_1__["LinearGaugeComponent"]], styles: ["p[_ngcontent-%COMP%] {\r\n    margin: auto;\r\n    text-align: center;\r\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImdlYXJtZXRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksWUFBWTtJQUNaLGtCQUFrQjtBQUN0QiIsImZpbGUiOiJnZWFybWV0ZXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbInAge1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG59Il19 */"] });
 
 
 /***/ }),
@@ -326,7 +354,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _live_race_live_race_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./live-race/live-race.component */ "UGgW");
 /* harmony import */ var _blocks_speedometer_speedometer_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./blocks/speedometer/speedometer.component */ "QxtA");
 /* harmony import */ var _blocks_gearmeter_gearmeter_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./blocks/gearmeter/gearmeter.component */ "XTvd");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _blocks_racetime_racetime_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./blocks/racetime/racetime.component */ "8xUC");
+/* harmony import */ var _pipes_race_timer_pipe__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./pipes/race-timer-pipe */ "ZNFS");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+
 
 
 
@@ -338,18 +370,52 @@ __webpack_require__.r(__webpack_exports__);
 class AppModule {
 }
 AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
-AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]] });
-AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵdefineInjector"]({ providers: [], imports: [[
+AppModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"]] });
+AppModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵdefineInjector"]({ providers: [], imports: [[
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
             _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_1__["NgxChartsModule"]
         ]] });
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_7__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_9__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_2__["AppComponent"],
+        _pipes_race_timer_pipe__WEBPACK_IMPORTED_MODULE_8__["RaceTimerPipe"],
         _live_race_live_race_component__WEBPACK_IMPORTED_MODULE_4__["LiveRaceComponent"],
         _blocks_speedometer_speedometer_component__WEBPACK_IMPORTED_MODULE_5__["SpeedometerComponent"],
-        _blocks_gearmeter_gearmeter_component__WEBPACK_IMPORTED_MODULE_6__["GearmeterComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
+        _blocks_gearmeter_gearmeter_component__WEBPACK_IMPORTED_MODULE_6__["GearmeterComponent"],
+        _blocks_racetime_racetime_component__WEBPACK_IMPORTED_MODULE_7__["RacetimeComponent"]], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
         _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_3__["BrowserAnimationsModule"],
         _swimlane_ngx_charts__WEBPACK_IMPORTED_MODULE_1__["NgxChartsModule"]] }); })();
+
+
+/***/ }),
+
+/***/ "ZNFS":
+/*!******************************************!*\
+  !*** ./src/app/pipes/race-timer-pipe.ts ***!
+  \******************************************/
+/*! exports provided: RaceTimerPipe */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RaceTimerPipe", function() { return RaceTimerPipe; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
+
+class RaceTimerPipe {
+    transform(value) {
+        let minutes = Math.floor(value / 60000);
+        let seconds = Math.floor(value % 60000 / 1000);
+        let milliseconds = Math.floor(value % 1000);
+        return this.pad(minutes, 2) + ":" + this.pad(seconds, 2) + "." + this.pad(milliseconds, 3);
+    }
+    pad(num, size) {
+        let s = num + "";
+        while (s.length < size)
+            s = "0" + s;
+        return s;
+    }
+}
+RaceTimerPipe.ɵfac = function RaceTimerPipe_Factory(t) { return new (t || RaceTimerPipe)(); };
+RaceTimerPipe.ɵpipe = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefinePipe"]({ name: "raceTimer", type: RaceTimerPipe, pure: true });
 
 
 /***/ }),
