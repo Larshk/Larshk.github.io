@@ -1,1 +1,1 @@
-*.manifest text=auto eol=crlf
+*.manifest -crlf
